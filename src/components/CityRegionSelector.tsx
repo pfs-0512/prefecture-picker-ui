@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CITIES } from "@/data/locationData";
+import { CITIES, PREFECTURES } from "@/data/locationData";
 
 interface CityRegionSelectorProps {
   selectedPrefectures: string[];
@@ -40,10 +40,15 @@ export const CityRegionSelector = ({
     setSelectedRegions(newSelection);
   };
 
+  // PREFECTURESの順序に基づいて選択された都道府県をソート
+  const sortedPrefectures = PREFECTURES.filter(pref => 
+    selectedPrefectures.includes(pref)
+  );
+
   return (
     <ScrollArea className="h-[400px] border rounded-md p-4">
       <div className="space-y-2">
-        {selectedPrefectures.map(prefecture => (
+        {sortedPrefectures.map(prefecture => (
           <div key={prefecture} className="mb-4">
             <h3 className="font-medium mb-2">{prefecture}</h3>
             <div className="space-y-4 ml-2">
