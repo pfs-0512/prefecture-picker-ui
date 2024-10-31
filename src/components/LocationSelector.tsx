@@ -31,7 +31,7 @@ const LocationSelector = () => {
     
     // Get all regions from all cities in selected prefectures
     const allRegions = selectedPrefectures.flatMap(prefecture =>
-      Object.entries(CITIES[prefecture] || {}).flatMap(([_, regions]) => regions)
+      Object.entries(CITIES[prefecture] || {}).flatMap(([_, regions]) => (regions as string[]))
     );
     
     if (selectedCities.length === allCities.length) {

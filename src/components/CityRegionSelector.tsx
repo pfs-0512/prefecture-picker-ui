@@ -18,17 +18,25 @@ export const CityRegionSelector = ({
   setSelectedRegions,
 }: CityRegionSelectorProps) => {
   const handleCityChange = (city: string, prefecture: string) => {
-    const newSelection = selectedCities.includes(city)
+    const newCitySelection = selectedCities.includes(city)
       ? selectedCities.filter(c => c !== city)
       : [...selectedCities, city];
     
-    setSelectedCities(newSelection);
+    setSelectedCities(newCitySelection);
     
-    if (!newSelection.includes(city)) {
+    // Get all regions for the selected city
+    const cityRegions = CITIES[prefecture][city] as string[];
+    
+    if (!newCitySelection.includes(city)) {
+      // If city is being unchecked, remove its regions
       const updatedRegions = selectedRegions.filter(region => 
-        !CITIES[prefecture][city]?.includes(region)
+        !cityRegions.includes(region)
       );
       setSelectedRegions(updatedRegions);
+    } else {
+      // If city is being checked, add all its regions
+      const newRegions = [...new Set([...selectedRegions, ...cityRegions])];
+      setSelectedRegions(newRegions);
     }
   };
 
