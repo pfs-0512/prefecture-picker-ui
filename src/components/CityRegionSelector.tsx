@@ -46,11 +46,11 @@ export const CityRegionSelector = ({
   );
 
   return (
-    <ScrollArea className="h-[400px] border rounded-md p-4">
+    <ScrollArea className="h-[400px] p-4">
       <div className="space-y-2">
         {sortedPrefectures.map(prefecture => (
           <div key={prefecture} className="mb-4">
-            <h3 className="font-medium mb-2">{prefecture}</h3>
+            <h3 className="font-medium mb-2 text-[#4F6B84]">{prefecture}</h3>
             <div className="space-y-4 ml-2">
               {Object.entries(CITIES[prefecture] || {}).map(([city, regions]) => (
                 <div key={city}>
@@ -59,6 +59,7 @@ export const CityRegionSelector = ({
                       id={city}
                       checked={selectedCities.includes(city)}
                       onCheckedChange={() => handleCityChange(city, prefecture)}
+                      className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
                     />
                     <label
                       htmlFor={city}
@@ -75,6 +76,7 @@ export const CityRegionSelector = ({
                             id={region}
                             checked={selectedRegions.includes(region)}
                             onCheckedChange={() => handleRegionChange(region)}
+                            className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
                           />
                           <label
                             htmlFor={region}

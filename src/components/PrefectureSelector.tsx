@@ -34,7 +34,7 @@ export const PrefectureSelector = ({
   };
 
   return (
-    <ScrollArea className="h-[400px] border rounded-md p-4">
+    <ScrollArea className="h-[400px] p-4">
       <div className="space-y-2">
         {PREFECTURES.map((pref) => (
           <div key={pref} className="flex items-center space-x-2">
@@ -42,6 +42,7 @@ export const PrefectureSelector = ({
               id={pref}
               checked={selectedPrefectures.includes(pref)}
               onCheckedChange={() => handlePrefectureChange(pref)}
+              className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
             />
             <label
               htmlFor={pref}
