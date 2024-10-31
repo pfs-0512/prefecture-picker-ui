@@ -9,9 +9,9 @@ const Index = () => {
         <h1 className="text-2xl font-bold text-[#4F6B84] mb-6">
           一般店マッチング条件
         </h1>
+        <EmailInput />
         <CarTypeSelector />
         <LocationSelector />
-        <EmailInput />
       </div>
     </div>
   );
