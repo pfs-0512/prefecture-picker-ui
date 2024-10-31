@@ -4,6 +4,7 @@ import { PREFECTURES, CITIES } from "@/data/locationData";
 
 interface PrefectureSelectorProps {
   selectedPrefectures: string[];
+  selectedCities: string[];
   setSelectedPrefectures: (prefectures: string[]) => void;
   setSelectedCities: (cities: string[]) => void;
   setSelectedRegions: (regions: string[]) => void;
@@ -11,6 +12,7 @@ interface PrefectureSelectorProps {
 
 export const PrefectureSelector = ({
   selectedPrefectures,
+  selectedCities,
   setSelectedPrefectures,
   setSelectedCities,
   setSelectedRegions,

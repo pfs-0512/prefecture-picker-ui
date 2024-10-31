@@ -3,7 +3,6 @@ import { Map } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { PrefectureSelector } from "./PrefectureSelector";
 import { CityRegionSelector } from "./CityRegionSelector";
 
@@ -36,6 +35,7 @@ const LocationSelector = () => {
             <Label>都道府県</Label>
             <PrefectureSelector
               selectedPrefectures={selectedPrefectures}
+              selectedCities={selectedCities}
               setSelectedPrefectures={setSelectedPrefectures}
               setSelectedCities={setSelectedCities}
               setSelectedRegions={setSelectedRegions}
