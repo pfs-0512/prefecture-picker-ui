@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Checkbox } from "@/components/ui/checkbox";
-import { PREFECTURES } from "@/data/locationData";
+import { PREFECTURES, CITIES } from "@/data/locationData";
 
 interface PrefectureSelectorProps {
   selectedPrefectures: string[];
@@ -16,19 +16,19 @@ export const PrefectureSelector = ({
   setSelectedRegions,
 }: PrefectureSelectorProps) => {
   const handlePrefectureChange = (prefecture: string) => {
-    setSelectedPrefectures(prev => {
-      const newSelection = prev.includes(prefecture)
-        ? prev.filter(p => p !== prefecture)
-        : [...prev, prefecture];
-      
-      if (!newSelection.includes(prefecture)) {
-        setSelectedCities(prev => 
-          prev.filter(city => !Object.keys(CITIES[prefecture] || {}).includes(city))
-        );
-        setSelectedRegions([]);
-      }
-      return newSelection;
-    });
+    const newSelection = selectedPrefectures.includes(prefecture)
+      ? selectedPrefectures.filter(p => p !== prefecture)
+      : [...selectedPrefectures, prefecture];
+    
+    setSelectedPrefectures(newSelection);
+    
+    if (!newSelection.includes(prefecture)) {
+      const updatedCities = selectedCities.filter(city => 
+        !Object.keys(CITIES[prefecture] || {}).includes(city)
+      );
+      setSelectedCities(updatedCities);
+      setSelectedRegions([]);
+    }
   };
 
   return (

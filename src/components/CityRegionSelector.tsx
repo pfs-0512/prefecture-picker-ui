@@ -18,26 +18,26 @@ export const CityRegionSelector = ({
   setSelectedRegions,
 }: CityRegionSelectorProps) => {
   const handleCityChange = (city: string, prefecture: string) => {
-    setSelectedCities(prev => {
-      const newSelection = prev.includes(city)
-        ? prev.filter(c => c !== city)
-        : [...prev, city];
-      
-      if (!newSelection.includes(city)) {
-        setSelectedRegions(prev =>
-          prev.filter(region => !CITIES[prefecture][city]?.includes(region))
-        );
-      }
-      return newSelection;
-    });
+    const newSelection = selectedCities.includes(city)
+      ? selectedCities.filter(c => c !== city)
+      : [...selectedCities, city];
+    
+    setSelectedCities(newSelection);
+    
+    if (!newSelection.includes(city)) {
+      const updatedRegions = selectedRegions.filter(region => 
+        !CITIES[prefecture][city]?.includes(region)
+      );
+      setSelectedRegions(updatedRegions);
+    }
   };
 
   const handleRegionChange = (region: string) => {
-    setSelectedRegions(prev =>
-      prev.includes(region)
-        ? prev.filter(r => r !== region)
-        : [...prev, region]
-    );
+    const newSelection = selectedRegions.includes(region)
+      ? selectedRegions.filter(r => r !== region)
+      : [...selectedRegions, region];
+    
+    setSelectedRegions(newSelection);
   };
 
   return (
@@ -64,7 +64,7 @@ export const CityRegionSelector = ({
                   </div>
                   {selectedCities.includes(city) && (
                     <div className="ml-4 space-y-2">
-                      {regions.map((region) => (
+                      {(regions as string[]).map((region) => (
                         <div key={region} className="flex items-center space-x-2">
                           <Checkbox
                             id={region}
