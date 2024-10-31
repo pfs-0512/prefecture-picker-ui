@@ -1,6 +1,13 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CITIES, PREFECTURES } from "@/data/locationData";
+import { ChevronDown } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { useState } from "react";
 
 interface CityRegionSelectorProps {
   selectedPrefectures: string[];
@@ -17,6 +24,8 @@ export const CityRegionSelector = ({
   setSelectedCities,
   setSelectedRegions,
 }: CityRegionSelectorProps) => {
+  const [openCities, setOpenCities] = useState<Record<string, boolean>>({});
+
   const handleCityChange = (city: string, prefecture: string) => {
     const newCitySelection = selectedCities.includes(city)
       ? selectedCities.filter(c => c !== city)
@@ -48,6 +57,13 @@ export const CityRegionSelector = ({
     setSelectedRegions(newSelection);
   };
 
+  const toggleCity = (city: string) => {
+    setOpenCities(prev => ({
+      ...prev,
+      [city]: !prev[city]
+    }));
+  };
+
   // PREFECTURESの順序に基づいて選択された都道府県をソート
   const sortedPrefectures = PREFECTURES.filter(pref => 
     selectedPrefectures.includes(pref)
@@ -62,40 +78,49 @@ export const CityRegionSelector = ({
             <div className="space-y-4 ml-2">
               {Object.entries(CITIES[prefecture] || {}).map(([city, regions]) => (
                 <div key={city}>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Checkbox
-                      id={city}
-                      checked={selectedCities.includes(city)}
-                      onCheckedChange={() => handleCityChange(city, prefecture)}
-                      className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
-                    />
-                    <label
-                      htmlFor={city}
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      {city}
-                    </label>
-                  </div>
-                  {selectedCities.includes(city) && (
-                    <div className="ml-4 space-y-2">
-                      {(regions as string[]).map((region) => (
-                        <div key={region} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={region}
-                            checked={selectedRegions.includes(region)}
-                            onCheckedChange={() => handleRegionChange(region)}
-                            className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
-                          />
-                          <label
-                            htmlFor={region}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            {region}
-                          </label>
-                        </div>
-                      ))}
+                  <Collapsible open={openCities[city]} onOpenChange={() => toggleCity(city)}>
+                    <div className="flex items-center space-x-2 mb-2">
+                      <Checkbox
+                        id={city}
+                        checked={selectedCities.includes(city)}
+                        onCheckedChange={() => handleCityChange(city, prefecture)}
+                        className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
+                      />
+                      <label
+                        htmlFor={city}
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {city}
+                      </label>
+                      <CollapsibleTrigger className="ml-auto">
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform ${
+                            openCities[city] ? "transform rotate-180" : ""
+                          }`}
+                        />
+                      </CollapsibleTrigger>
                     </div>
-                  )}
+                    <CollapsibleContent>
+                      <div className="ml-4 space-y-2">
+                        {(regions as string[]).map((region) => (
+                          <div key={region} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={region}
+                              checked={selectedRegions.includes(region)}
+                              onCheckedChange={() => handleRegionChange(region)}
+                              className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
+                            />
+                            <label
+                              htmlFor={region}
+                              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              {region}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
                 </div>
               ))}
             </div>
