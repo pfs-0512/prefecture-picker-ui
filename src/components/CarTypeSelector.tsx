@@ -29,7 +29,7 @@ const CarTypeSelector = () => {
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 bg-[#FFFBE5]">
         <div className="space-y-4">
           {carTypes.map((type) => (
             <div key={type.id} className="flex items-center space-x-2">

@@ -13,7 +13,7 @@ const EmailInput = () => {
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 bg-[#FFFBE5]">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-[#4F6B84] font-medium">
             メールアドレス
@@ -22,7 +22,7 @@ const EmailInput = () => {
             type="email"
             id="email"
             placeholder="example@example.com"
-            className="w-full"
+            className="w-full bg-white"
           />
         </div>
       </div>
