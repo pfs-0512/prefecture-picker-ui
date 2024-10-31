@@ -13,16 +13,16 @@ const EmailInput = () => {
         </div>
       </div>
 
-      <div className="p-6 bg-[#FFFBE5]">
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-[#4F6B84] font-medium">
+      <div className="p-6">
+        <div className="flex items-center gap-4">
+          <Label htmlFor="email" className="text-[#4F6B84] font-medium whitespace-nowrap">
             メールアドレス
           </Label>
           <Input
             type="email"
             id="email"
             placeholder="example@example.com"
-            className="w-full bg-white"
+            className="flex-1 bg-[#FFFBE5]"
           />
         </div>
       </div>

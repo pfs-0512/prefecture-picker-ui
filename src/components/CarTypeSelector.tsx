@@ -29,24 +29,29 @@ const CarTypeSelector = () => {
         </div>
       </div>
 
-      <div className="p-6 bg-[#FFFBE5]">
-        <div className="space-y-4">
-          {carTypes.map((type) => (
-            <div key={type.id} className="flex items-center space-x-2">
-              <Checkbox
-                id={type.id}
-                checked={selectedTypes.includes(type.id)}
-                onCheckedChange={() => handleTypeChange(type.id)}
-                className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
-              />
-              <Label
-                htmlFor={type.id}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                {type.label}
-              </Label>
-            </div>
-          ))}
+      <div className="p-6">
+        <div className="flex items-center gap-4">
+          <Label className="text-[#4F6B84] font-medium whitespace-nowrap">
+            国産車・輸入車
+          </Label>
+          <div className="flex gap-4">
+            {carTypes.map((type) => (
+              <div key={type.id} className="flex items-center space-x-2">
+                <Checkbox
+                  id={type.id}
+                  checked={selectedTypes.includes(type.id)}
+                  onCheckedChange={() => handleTypeChange(type.id)}
+                  className="border-gray-400 data-[state=checked]:bg-[#4F6B84] data-[state=checked]:border-[#4F6B84]"
+                />
+                <Label
+                  htmlFor={type.id}
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {type.label}
+                </Label>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Card>
