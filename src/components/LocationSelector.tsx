@@ -24,8 +24,14 @@ const LocationSelector = () => {
   };
 
   const handleToggleAllCities = () => {
+    // Get all cities from selected prefectures
     const allCities = selectedPrefectures.flatMap(prefecture => 
       Object.keys(CITIES[prefecture] || {})
+    );
+    
+    // Get all regions from all cities in selected prefectures
+    const allRegions = selectedPrefectures.flatMap(prefecture =>
+      Object.entries(CITIES[prefecture] || {}).flatMap(([_, regions]) => regions)
     );
     
     if (selectedCities.length === allCities.length) {
@@ -33,6 +39,7 @@ const LocationSelector = () => {
       setSelectedRegions([]);
     } else {
       setSelectedCities(allCities);
+      setSelectedRegions(allRegions);
     }
   };
 
