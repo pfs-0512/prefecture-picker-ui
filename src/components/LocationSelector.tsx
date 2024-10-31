@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Map, X } from "lucide-react";
+import { Map } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -10,15 +10,22 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 const PREFECTURES = [
   "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
   "東京都", "大阪府", "愛知県", "福岡県",
-  // ... 他の都道府県
 ];
 
 // 市区町村データ（デモ用）
 const CITIES: { [key: string]: string[] } = {
-  "東京都": ["渋谷区", "新宿区", "港区", "千代田区", "中央区", "品川区"],
-  "大阪府": ["大阪市", "堺市", "豊中市", "吹田市", "高槻市"],
-  "北海道": ["札幌市", "函館市", "旭川市", "釧路市", "帯広市"],
-  // ... 他の市区町村
+  "東京都": [
+    "渋谷区", "新宿区", "港区", "千代田区", "中央区", "品川区",
+    "檜原村", "奥多摩町", "利島村", "新島村", "神津島村"
+  ],
+  "大阪府": [
+    "大阪市", "堺市", "豊中市", "吹田市", "高槻市",
+    "能勢町", "豊能町", "河南町", "千早赤阪村"
+  ],
+  "北海道": [
+    "札幌市", "函館市", "旭川市", "釧路市", "帯広市",
+    "東川町", "美瑛町", "上富良野町", "中富良野町", "南富良野町", "占冠村"
+  ],
 };
 
 const LocationSelector = () => {
@@ -31,7 +38,6 @@ const LocationSelector = () => {
         ? prev.filter(p => p !== prefecture)
         : [...prev, prefecture];
       
-      // 都道府県が解除された場合、その都道府県の市区町村も選択解除
       if (!newSelection.includes(prefecture)) {
         setSelectedCities(prev => 
           prev.filter(city => !CITIES[prefecture]?.includes(city))
