@@ -30,7 +30,7 @@ const LocationSelector = () => {
         <div className="flex gap-6">
           <div className="flex-1 space-y-2">
             <Label className="text-[#4F6B84] font-medium">都道府県</Label>
-            <div className="bg-[#FFFFD9] border border-gray-200 rounded-sm">
+            <div className="bg-background border border-gray-200 rounded-sm">
               <PrefectureSelector
                 selectedPrefectures={selectedPrefectures}
                 selectedCities={selectedCities}
@@ -43,7 +43,7 @@ const LocationSelector = () => {
 
           <div className="flex-1 space-y-2">
             <Label className="text-[#4F6B84] font-medium">市区町村・地域</Label>
-            <div className="bg-[#FFFFD9] border border-gray-200 rounded-sm">
+            <div className="bg-background border border-gray-200 rounded-sm">
               <CityRegionSelector
                 selectedPrefectures={selectedPrefectures}
                 selectedCities={selectedCities}
